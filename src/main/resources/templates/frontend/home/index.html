@@ -1,0 +1,17 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="frontend/layouts/main">
+
+<div layout:fragment="content">
+    <h1>main</h1>
+    <div id="articles">
+        <div class="article">
+            <h2>{{ post.title }}</h2>
+            <img src="http://via.placeholder.com/350x150" alt=""/>
+            <p>{{ post.body }}</p>
+        </div>
+    </div>
+</div>
+
+
+</html>
