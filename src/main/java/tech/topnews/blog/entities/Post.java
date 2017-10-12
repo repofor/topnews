@@ -1,21 +1,43 @@
 package tech.topnews.blog.entities;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "posts")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 300)
     private String title;
+
+    @Column(nullable = false)
     private String body;
+
+    @Column(nullable = false)
+    private String outline;
+
+    @Column(nullable = false)
+    private String description;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User user;
+
+    @Column(nullable = false)
+    private Date date = new Date();
 
     public Post() {
     }
 
-    public Post(Long id, String title, String body, User user) {
+    public Post(Long id, String title, String body, String outline, String description, User user) {
 
         this.id = id;
         this.title = title;
         this.body = body;
+        this.outline = outline;
+        this.description = description;
         this.user = user;
     }
 
@@ -43,6 +65,22 @@ public class Post {
         this.body = body;
     }
 
+    public String getOutline() {
+        return outline;
+    }
+
+    public void setOutline(String outline) {
+        this.outline = outline;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public User getUser() {
         return user;
     }
@@ -58,9 +96,6 @@ public class Post {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    private Date date = new Date();
-
 
     @Override
     public String toString() {

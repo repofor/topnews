@@ -1,14 +1,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorator="frontend/layouts/main">
 
 <div layout:fragment="content">
-    <h1>main</h1>
+    <h1>Articles</h1>
     <div id="articles">
-        <div class="article">
-            <h2>{{ post.title }}</h2>
-            <img src="http://via.placeholder.com/350x150" alt=""/>
-            <p>{{ post.body }}</p>
+        <div class="article" th:each="post : ${latestPosts}">
+            <a href="#" th:href="@{/post/{id}/outline(id=${post.id})}">
+                <img src="http://via.placeholder.com/350x150" alt=""/>
+                <p class="article-title" th:text="${post.title}"></p>
+            </a>
         </div>
     </div>
 </div>

@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="frontend/layouts/main">
+
+<div layout:fragment="content">
+    <h1>Articles</h1>
+        <div class="article">
+            <img src="http://via.placeholder.com/650x350" alt=""/>
+            <p th:text="'type ' + ${type}"></p>
+            <div th:switch="${type}">
+                <div th:case="'outline'">
+                    outline here
+                    <p th:utext="${post.outline}"></p>
+                    <a href="#" th:href="@{/post/{id}/description(id=${post.id})}">read more</a>
+                </div>
+                <div th:case="'description'">
+                    outline here
+                    <p th:utext="${post.description}"></p>
+                    <a href="#" th:href="@{/post/{id}/full(id=${post.id})}">read more</a>
+                </div>
+                <div th:case="'full'">
+                    outline here
+                    <p th:utext="${post.outline}"></p>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+</html>
