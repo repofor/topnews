@@ -2,24 +2,25 @@ package tech.topnews.blog.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import tech.topnews.blog.entities.Post;
-import tech.topnews.blog.entities.User;
 import tech.topnews.blog.repositories.PostRepository;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
-@Primary
 public class PostServiceImpl implements PostService {
 
     @Autowired
     private PostRepository postRepo;
+
+    private UserService userService;
+    @Autowired
+    public void setUserService(UserService userService){
+        this.userService = userService;
+    }
 
     @Override
     public List<Post> findAll() {
@@ -37,12 +38,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post create(Post post) {
-        return this.postRepo.save(post);
-    }
-
-    @Override
-    public Post edit(Post post) {
+    public Post save(Post post) {
+        if (post.getId() == null){
+            post.setCreated_at(new Date());
+            post.setUser(userService.findById(1L));
+            post.setLanguage("RU");
+        }
         return this.postRepo.save(post);
     }
 

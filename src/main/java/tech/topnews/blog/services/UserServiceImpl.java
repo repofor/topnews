@@ -1,7 +1,6 @@
 package tech.topnews.blog.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import tech.topnews.blog.entities.User;
 import tech.topnews.blog.repositories.UserRepository;
@@ -10,10 +9,13 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@Primary
 public class UserServiceImpl implements UserService {
-    @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    public void setUserRepo(UserRepository userRepo) {
+        this.userRepo = userRepo;
+    }
 
     @Override
     public List<User> findAll() {

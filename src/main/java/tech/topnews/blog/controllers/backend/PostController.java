@@ -7,32 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import tech.topnews.blog.entities.Post;
 import tech.topnews.blog.services.PostService;
-import tech.topnews.blog.services.UserService;
 
-import java.util.Date;
 
 @Controller("adminPostController")
 public class PostController {
 
     private PostService postService;
-    private UserService userService;
 
     @Autowired
     public void setPostService(PostService postService){
         this.postService = postService;
-    }
-
-    @Autowired
-    public void setUserService(UserService userService){
-        this.userService = userService;
-    }
-
-    @GetMapping("admin/post/create")
-    public String create(Model model){
-        model.addAttribute("pageTitle", "Добавить пост");
-        model.addAttribute("model", new Post());
-
-        return "backend/post/create";
     }
 
     @GetMapping("admin/post")
@@ -42,12 +26,17 @@ public class PostController {
         return "backend/post/index";
     }
 
+    @GetMapping("admin/post/form")
+    public String create(Model model){
+        model.addAttribute("pageTitle", "Добавить пост");
+        model.addAttribute("model", new Post());
+
+        return "backend/post/form";
+    }
+
     @PostMapping("admin/post")
     public String save(Post post){
-        post.setCreated_at(new Date());
-        post.setUser(userService.findById(1L));
-        post.setLanguage("RU");
-        postService.create(post);
+        postService.save(post);
 
         return "redirect:/admin";
     }
