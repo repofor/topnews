@@ -13,8 +13,13 @@ import java.util.List;
 @Service
 public class PostServiceImpl implements PostService {
 
-    @Autowired
     private PostRepository postRepo;
+
+    @Autowired
+    public void setPostRepo(PostRepository postRepo) {
+        this.postRepo = postRepo;
+    }
+
 
     private UserService userService;
     @Autowired
@@ -40,7 +45,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post save(Post post) {
         if (post.getId() == null){
-            post.setCreated_at(new Date());
+            post.setCreatedAt(new Date());
             post.setUser(userService.findById(1L));
             post.setLanguage("RU");
         }

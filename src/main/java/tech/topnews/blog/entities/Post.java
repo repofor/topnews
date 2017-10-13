@@ -27,24 +27,12 @@ public class Post {
     @Column(nullable = true, length = 10)
     private String language;
 
+    @Column(nullable = false, columnDefinition="DATETIME")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt = new Date();
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User user;
-
-    @Column(nullable = false)
-    private Date created_at = new Date();
-
-    public Post() {
-    }
-
-    public Post(Long id, String title, String body, String outline, String description, User user) {
-
-        this.id = id;
-        this.title = title;
-        this.body = body;
-        this.outline = outline;
-        this.description = description;
-        this.user = user;
-    }
 
     public Long getId() {
         return id;
@@ -94,12 +82,12 @@ public class Post {
         this.user = user;
     }
 
-    public Date getCreated_at() {
-        return created_at;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getLanguage() {
@@ -117,7 +105,7 @@ public class Post {
                 ", title='" + title + '\'' +
                 ", body='" + body + '\'' +
                 ", user=" + user +
-                ", created_at=" + created_at +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }
