@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="backend/layouts/main">
+
+<div layout:fragment="content">
+    <table width="100%" class="table table-striped table-bordered table-hover no-footer dtr-inline" role="grid" style="width: 100%;">
+        <thead>
+        <tr role="row">
+            <th class="sorting" tabindex="0" rowspan="1" colspan="1">IDs</th>
+            <th class="sorting" tabindex="0" rowspan="1" colspan="1">Title</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="gradeU odd" role="row"  th:each="post : ${posts}">
+            <td><a href="#" th:href="@{/admin/post/{id}(id=${post.id})}" th:text="${post.id}">1</a></td>
+            <td th:text="${post.title}">Lorem ipsum</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</html>

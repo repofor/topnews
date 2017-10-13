@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+
+<link rel="stylesheet" href="../../public/css/app.css"  th:href="@{/css/app.css}"/>
+<div layout:fragment="styles"></div>
+
+<ul id="messages" th:with="notifyMessages=${session[T(tech.topnews.blog.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
+    <li th:each="msg : ${notifyMessages}" th:text="${msg.text}"
+        th:class="${#strings.toLowerCase(msg.type)}">
+    </li>
+    <span th:if="${notifyMessages}" th:remove="all"
+          th:text="${session.remove(T(tech.topnews.blog.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}">
+    </span>
+
+</ul>
+
+<div layout:fragment="content" id="content"></div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="../../public/js/app.js" th:src="@{/js/app.js}"></script>
+
+<div layout:fragment="scripts"></div>
+
+</body>
+</html>

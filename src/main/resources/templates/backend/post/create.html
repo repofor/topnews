@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="backend/layouts/main">
+
+<div layout:fragment="content">
+    <form th:object="${model}" th:action="@{/admin/post}" th:method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Заголовок" th:field="*{title}"/>
+            </div>
+            <div class="form-group">
+                <textarea type="text" class="form-control" placeholder="Текст" rows="15" th:field="*{body}"/>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label>Изображение</label>
+                <input type="file"/>
+            </div>
+            <div class="form-group">
+                <textarea type="text" class="form-control" placeholder="Описание 1" rows="2" th:field="*{outline}"/>
+            </div>
+            <div class="form-group">
+                <textarea type="text" class="form-control" placeholder="Описание 2" rows="4" th:field="*{description}"/>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </form>
+</div>
+
+</html>

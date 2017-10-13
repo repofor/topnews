@@ -22,11 +22,14 @@ public class Post {
     @Column(nullable = false)
     private String description;
 
+    @Column(nullable = true, length = 10)
+    private String language;
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User user;
 
     @Column(nullable = false)
-    private Date date = new Date();
+    private Date created_at = new Date();
 
     public Post() {
     }
@@ -89,12 +92,20 @@ public class Post {
         this.user = user;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreated_at() {
+        return created_at;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     @Override
@@ -104,7 +115,7 @@ public class Post {
                 ", title='" + title + '\'' +
                 ", body='" + body + '\'' +
                 ", user=" + user +
-                ", date=" + date +
+                ", created_at=" + created_at +
                 '}';
     }
 }
